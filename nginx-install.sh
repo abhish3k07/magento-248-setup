@@ -41,3 +41,16 @@ fi
 echo "==> Updating package index"
 apt-get update -y
 
+echo "==> Installing NGINX"
+apt-get install -y nginx
+
+echo "==> Enabling and starting NGINX"
+systemctl enable nginx
+systemctl start nginx
+
+echo "==> Verifying NGINX installation"
+nginx -v
+
+echo "=== NGINX INSTALL COMPLETED SUCCESSFULLY ==="
+
+
