@@ -11,6 +11,7 @@ DOCKER_SCRIPT_URL="https://raw.githubusercontent.com/abhish3k07/magento-248-setu
 NGINX_SCRIPT_URL="https://raw.githubusercontent.com/abhish3k07/magento-248-setup/refs/heads/main/nginx-install.sh"
 PHP_SCRIPT_URL="https://raw.githubusercontent.com/abhish3k07/magento-248-setup/refs/heads/main/php84-install.sh"
 VARNISH_SCRIPT_URL="https://raw.githubusercontent.com/abhish3k07/magento-248-setup/refs/heads/main/varnish77-install.sh"
+MARIADB_SCRIPT_URL="https://raw.githubusercontent.com/abhish3k07/magento-248-setup/refs/heads/main/mariadb-install.sh"
 
 # Directory to download scripts to
 DOWNLOAD_DIR="/root/setup-scripts"
@@ -24,9 +25,10 @@ wget -O install-docker.sh "$DOCKER_SCRIPT_URL"
 wget -O nginx-install.sh "$NGINX_SCRIPT_URL"
 wget -O php84-install.sh "$PHP_SCRIPT_URL"
 wget -O varnish77-install.sh "$VARNISH_SCRIPT_URL"
+wget -O mariadb-install.sh "$MARIADB_SCRIPT_URL"
 
 # Make scripts executable
-chmod +x install-docker.sh nginx-install.sh php84-install.sh varnish77-install.sh
+chmod +x install-docker.sh nginx-install.sh php84-install.sh varnish77-install.sh mariadb-install.sh
 
 echo "==> Executing scripts..."
 
@@ -41,5 +43,8 @@ echo "-> Running php84-install.sh"
 
 echo "-> Running varnish77-install.sh"
 ./varnish77-install.sh
+
+echo "-> Running mariadb-install.sh"
+./mariadb-install.sh
 
 echo "=== User Data Script Completed ==="
