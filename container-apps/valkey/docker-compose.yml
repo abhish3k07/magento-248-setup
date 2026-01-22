@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  valkey-shoeconz:
+    image: valkey/valkey:8-alpine
+    container_name: valkey-shoeconz
+    command: [
+      "redis-server",
+      "--maxmemory", "1500mb",
+      "--maxmemory-policy", "allkeys-lru"
+    ]
+    ports:
+      - "6371:6379"
+    deploy:
+      resources:
+        limits:
+          memory: 1700M
+
+  valkey-shoecoau:
+    image: valkey/valkey:8-alpine
+    container_name: valkey-shoecoau
+    command: [
+      "redis-server",
+      "--maxmemory", "1500mb",
+      "--maxmemory-policy", "allkeys-lru"
+    ]
+    ports:
+      - "6372:6379"
+    deploy:
+      resources:
+        limits:
+          memory: 1700M
+
+  valkey-novonz:
+    image: valkey/valkey:8-alpine
+    container_name: valkey-novonz
+    command: [
+      "redis-server",
+      "--maxmemory", "1500mb",
+      "--maxmemory-policy", "allkeys-lru"
+    ]
+    ports:
+      - "6373:6379"
+    deploy:
+      resources:
+        limits:
+          memory: 1700M
+
+  valkey-novoau:
+    image: valkey/valkey:8-alpine
+    container_name: valkey-novoau
+    command: [
+      "redis-server",
+      "--maxmemory", "1500mb",
+      "--maxmemory-policy", "allkeys-lru"
+    ]
+    ports:
+      - "6374:6379"
+    deploy:
+      resources:
+        limits:
+          memory: 1700M
+
+  valkey-ipanema:
+    image: valkey/valkey:8-alpine
+    container_name: valkey-ipanema
+    command: [
+      "redis-server",
+      "--maxmemory", "1000mb",
+      "--maxmemory-policy", "allkeys-lru"
+    ]
+    ports:
+      - "6375:6379"
+    deploy:
+      resources:
+        limits:
+          memory: 1200M
+
+networks:
+  default:
+    driver: bridge
