@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  valkey-aumcomm:
+    image: valkey/valkey:8-alpine
+    container_name: valkey-aumcomm
+    command: [
+      "redis-server",
+      "--maxmemory", "1500mb",
+      "--maxmemory-policy", "allkeys-lru"
+    ]
+    ports:
+      - "6376:6379"
+    deploy:
+      resources:
+        limits:
+          memory: 1700M
+
+networks:
+  default:
+    driver: bridge
