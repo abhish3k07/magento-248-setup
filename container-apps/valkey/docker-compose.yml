@@ -11,6 +11,7 @@ services:
     ]
     ports:
       - "6371:6379"
+    restart: unless-stopped
     deploy:
       resources:
         limits:
@@ -26,6 +27,7 @@ services:
     ]
     ports:
       - "6372:6379"
+    restart: unless-stopped
     deploy:
       resources:
         limits:
@@ -41,6 +43,7 @@ services:
     ]
     ports:
       - "6373:6379"
+    restart: unless-stopped
     deploy:
       resources:
         limits:
@@ -56,6 +59,7 @@ services:
     ]
     ports:
       - "6374:6379"
+    restart: unless-stopped
     deploy:
       resources:
         limits:
@@ -71,6 +75,7 @@ services:
     ]
     ports:
       - "6375:6379"
+    restart: unless-stopped
     deploy:
       resources:
         limits:

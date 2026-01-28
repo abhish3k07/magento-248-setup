@@ -44,6 +44,7 @@ apt-get install -y \
   php8.4-mysql \
   php8.4-soap \
   php8.4-xml \
+  php8.4-xmlrpc \
   php8.4-xsl \
   php8.4-zip \
   php8.4-simplexml \

@@ -34,7 +34,7 @@ chmod +x new-site-setup.sh
 **What this does:**
 - Creates system user `aumcomm`.
 - Configures PHP 8.4 FPM pool: `/etc/php/8.4/fpm/pool.d/aumcomm.conf`.
-- Configures Nginx site: `/etc/nginx/sites-enabled/aumcomm.conf`.
+- Configures Nginx site: `/etc/nginx/conf.d/aumcomm.conf`.
 - Creates web root: `/var/www/aumcomm` (linked to `/home/aumcomm/public_html`).
 - Sets permissions and sudoers privileges.
 
@@ -142,9 +142,9 @@ bin/magento setup:install \
 --timezone="America/Chicago" \
 --use-rewrites=1 \
 --search-engine=opensearch \
---search-engine-host=localhost \
---search-engine-port=9200 \
---search-engine-index-prefix=aumcomm \
+--opensearch-host=localhost \
+--opensearch-port=9200 \
+--opensearch-index-prefix=aumcomm \
 --cache-backend=redis \
 --cache-backend-redis-server=localhost \
 --cache-backend-redis-port=6376 \

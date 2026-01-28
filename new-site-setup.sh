@@ -25,15 +25,19 @@ sudo cp /backup/default_fpm_pool.conf /etc/php/8.4/fpm/pool.d/$username.conf
 
 sudo sed -i "s/unique_id/${username}/g" /etc/php/8.4/fpm/pool.d/$username.conf
 
-sudo wget -q https://gist.githubusercontent.com/ApostateDevOps/2490db9aa6d11efacb67815974bc5e82/raw/b0f92350918ba72ff272236ebdb02b645c69b17f/nginx_site_proxy.conf -O /etc/nginx/sites-enabled/$username-proxy.conf
+# Use conf.d for Nginx 1.28+ (official packages)
+sudo mkdir -p /etc/nginx/conf.d
 
-sudo sed -i "s/unique_id/${username}/g" /etc/nginx/sites-enabled/$username-proxy.conf
+sudo wget -q https://gist.githubusercontent.com/ApostateDevOps/2490db9aa6d11efacb67815974bc5e82/raw/b0f92350918ba72ff272236ebdb02b645c69b17f/nginx_site_proxy.conf -O /etc/nginx/conf.d/$username-proxy.conf
 
-sudo cp /backup/default_nginx.conf /etc/nginx/sites-enabled/$username.conf
+sudo sed -i "s/unique_id/${username}/g" /etc/nginx/conf.d/$username-proxy.conf
 
-sudo sed -i "s/unique_id/${username}/g" /etc/nginx/sites-enabled/$username.conf
+sudo cp /backup/default_nginx.conf /etc/nginx/conf.d/$username.conf
+
+sudo sed -i "s/unique_id/${username}/g" /etc/nginx/conf.d/$username.conf
 
 
+sudo mkdir -p /var/www
 sudo mkdir /var/www/${username}
 sudo ln -s /var/www/${username} /home/"$username"/public_html
 
