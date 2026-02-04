@@ -6,7 +6,35 @@ exec > >(tee /var/log/user-data.log) 2>&1
 
 echo "=== Starting User Data Script ==="
 
+
+# Function to wait for apt locks to be released
+wait_for_apt_locks() {
+    echo "Checking for apt locks..."
+    local check_count=0
+    while fuser /var/lib/dpkg/lock >/dev/null 2>&1 || \
+          fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1 || \
+          fuser /var/lib/apt/lists/lock >/dev/null 2>&1 || \
+          pgrep -x apt >/dev/null 2>&1 || \
+          pgrep -x apt-get >/dev/null 2>&1 || \
+          pgrep -x dpkg >/dev/null 2>&1 || \
+          pgrep -f "unattended-upgr" >/dev/null 2>&1; do
+        
+        echo "Apt is locked or running. Waiting (attempt $((++check_count)))..."
+        sleep 5
+        
+        # Failsafe: if waiting too long (e.g. 5 minutes), try to proceed or kill (optional, here just warning)
+        if [ "$check_count" -gt 60 ]; then
+             echo "Warning: Waited 5 minutes for apt locks. Proceeding anyway or stuck."
+             # meaningful action could be added here, but for now we just log
+             break
+        fi
+    done
+    echo "Apt locks seem clear."
+}
+
 echo "==> Updating system and installing base dependencies..."
+wait_for_apt_locks
+
 apt-get update -y
 DEBIAN_FRONTEND=noninteractive apt-get install -y \
     unzip \
@@ -83,6 +111,21 @@ echo "-> Running php84-install.sh"
 
 echo "-> Running varnish77-install.sh"
 ./varnish77-install.sh
+
+echo "-> Configuring Varnish VCL..."
+if [ -f "/etc/varnish/default.vcl" ]; then
+    cp /etc/varnish/default.vcl /etc/varnish/default.vcl.bak
+    echo "Backed up default.vcl"
+fi
+
+if [ -f "/backup/default_varnish.vcl" ]; then
+    cp /backup/default_varnish.vcl /etc/varnish/default.vcl
+    echo "Replaced default.vcl with custom version"
+    systemctl reload varnish
+    echo "Varnish reloaded"
+else
+    echo "Warning: Custom VCL not found in /backup"
+fi
 
 echo "-> Running mariadb-install.sh"
 ./mariadb-install.sh

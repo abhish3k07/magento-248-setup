@@ -137,9 +137,9 @@ bin/magento setup:install \
 --admin-email="admin@example.com" \
 --admin-user="admin" \
 --admin-password="StrongPassword123" \
---language="en_US" \
---currency="USD" \
---timezone="America/Chicago" \
+--language="en_AU" \
+--currency="AUD" \
+--timezone="Pacific/Auckland" \
 --use-rewrites=1 \
 --search-engine=opensearch \
 --opensearch-host=localhost \
@@ -148,18 +148,20 @@ bin/magento setup:install \
 --cache-backend=redis \
 --cache-backend-redis-server=localhost \
 --cache-backend-redis-port=6376 \
---cache-backend-redis-db=0 \
+--cache-backend-redis-db=1 \
 --page-cache=redis \
 --page-cache-redis-server=localhost \
 --page-cache-redis-port=6376 \
---page-cache-redis-db=1 \
+--page-cache-redis-db=2 \
 --session-save=redis \
 --session-save-redis-host=localhost \
 --session-save-redis-port=6376 \
---session-save-redis-db=2 \
+--session-save-redis-db=0 \
+--session-save-redis-disable-locking=1
 --amqp-host=localhost \
+--amqp-virtualhost=aumcomm
 --amqp-port=5672 \
---amqp-user=guest \
+--amqp-user=aumcomm \
 --amqp-password=guest
 ```
 
