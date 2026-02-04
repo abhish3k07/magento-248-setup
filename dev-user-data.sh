@@ -45,7 +45,8 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
     acl \
     cron \
     imagemagick \
-    git
+    git \
+    net-tools
 
 
 # Define script URLs - REPLACE THESE WITH YOUR ACTUAL REPO URLs

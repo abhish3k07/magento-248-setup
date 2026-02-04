@@ -161,7 +161,7 @@ bin/magento setup:install \
 --amqp-host=localhost \
 --amqp-virtualhost=aumcomm
 --amqp-port=5672 \
---amqp-user=aumcomm \
+--amqp-user=guest \
 --amqp-password=guest
 ```
 

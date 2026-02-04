@@ -25,6 +25,11 @@ sudo cp /backup/default_fpm_pool.conf /etc/php/8.4/fpm/pool.d/$username.conf
 
 sudo sed -i "s/unique_id/${username}/g" /etc/php/8.4/fpm/pool.d/$username.conf
 
+# Create PHP-FPM error log and assign permissions
+sudo touch /var/log/fpm-php.${username}.log
+sudo chown ${username}:${username} /var/log/fpm-php.${username}.log
+sudo chmod 664 /var/log/fpm-php.${username}.log
+
 # Use conf.d for Nginx 1.28+ (official packages)
 sudo mkdir -p /etc/nginx/conf.d
 
